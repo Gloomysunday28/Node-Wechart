@@ -19,10 +19,21 @@ body {
 }
 
 #messages {
+  padding: 10px 20px;
   width: 690px;
   height: 300px;
   overflow: auto;
   background: #eee;
   margin-bottom: 1em;
   margin-right: 10px;
+}
+
+.c-user__me {
+  margin: 10px 0;
+  text-align: left;
+}
+
+.c-user__other {
+  margin: 10px 0;
+  text-align: right;
 }

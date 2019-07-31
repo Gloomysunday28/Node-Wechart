@@ -1,5 +1,5 @@
 function divEscpedContent(message) {
-  return $('<div></div>').text(message)
+  return $('<div class="c-user__me"></div>').text(message)
 }
 
 function divSystem(message) {
@@ -19,7 +19,7 @@ function procssUserInput(chatApp) {
   } else {
     chatApp.sendMessage($('#room').text(), message)
     $('#messages').append(divEscpedContent(message))
-    $('#messages').scrollTop($('#message').prop('scrollHeight'))
+    $('#messages').scrollTop($('#messages').prop('scrollHeight'))
   }
 }
 
@@ -45,8 +45,9 @@ $(document).ready(function() {
   })
 
   socket.on('message', function(message) {
-    var newElement = $('<div></div>').text(message.text)
+    var newElement = (message.system ? $('<div></div>') : $('<div class="c-user__other"></div>')).text(message.text)
     $('#messages').append(newElement)
+    $('#messages').scrollTop($('#messages').prop('scrollHeight'))
   })
 
   socket.on('rooms', function(rooms) {
@@ -67,9 +68,9 @@ $(document).ready(function() {
     })
   })
 
-  setInterval(function() {
-    socket.emit('rooms')
-  }, 1000)
+  // setInterval(function() {
+  //   socket.emit('rooms')
+  // }, 1000)
 
   $('#send-message').focus()
 
