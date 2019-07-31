@@ -2,6 +2,7 @@ const http = require('http')
 const fs = require('fs')
 const path = require('path')
 const mime = require('mime') // 根据文件扩展名得出Mime类型
+const chatServer = require('./lib/chat_server')
 
 const cache = {} // 访问内存比访问文件系统快的多，所以把数据缓存在这里性能上会比较好
 
@@ -13,7 +14,7 @@ function send404(res) {
 
 function sendFile(res, filePath, fileContent) {
   res.writeHead(200, {
-    'Content-type': mime.lookup(path.basename(filePath))
+    'Content-type': mime.getType(path.basename(filePath))
   })
 
   res.end(fileContent)
@@ -38,3 +39,22 @@ function serverStatic(res, cache, absPath) {
     })
   }
 }
+
+const server = http.createServer((req, res) => {
+  var filePath = false
+
+  if (req.url === '/') {
+    filePath = 'public/index.html'  
+  } else {
+    filePath = 'public' + req.url
+  }
+
+  var absPath = './' + filePath
+  serverStatic(res, cache, absPath)
+})
+
+server.listen(3000, () => {
+  console.log('Server lstening on port 3000.');
+})
+
+chatServer.listen(server)
