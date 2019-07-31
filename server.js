@@ -53,8 +53,8 @@ const server = http.createServer((req, res) => {
   serverStatic(res, cache, absPath)
 })
 
-server.listen(3000, () => {
-  console.log('Server lstening on port 3000.');
+server.listen(3002, () => {
+  console.log('Server lstening on port 3002.');
 })
 
 chatServer.listen(server)
