@@ -20,6 +20,7 @@ function procssUserInput(chatApp) {
     chatApp.sendMessage($('#room').text(), message)
     $('#messages').append(divEscpedContent(message))
     $('#messages').scrollTop($('#messages').prop('scrollHeight'))
+    document.getElementById('send-message').value = ''
   }
 }
 
