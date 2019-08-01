@@ -1,8 +1,8 @@
+const empty = require('./empty')
 const http = require('http')
 const fs = require('fs')
 const path = require('path')
 const mime = require('mime') // 根据文件扩展名得出Mime类型
-
 const cache = {} // 访问内存比访问文件系统快的多，所以把数据缓存在这里性能上会比较好
 
 function send404(res) {
